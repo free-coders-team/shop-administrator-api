@@ -14,7 +14,7 @@ const app: Application = express();
 
 // Settings
 
-app.set("port", process.env.NODE_PORT || 3500);
+app.set("port", process.env.PORT || 3000);
 app.set("views", path.join("src", "views"));
 
 // Middelwares
