@@ -1,11 +1,10 @@
 import { Request, Response } from 'express'
-import { RequestCallback } from "src/types/controller";
+import { RequestCallback } from "src/types/controller"
 
-const ControllerBase = <T = {}>(callback: RequestCallback<T>) => {
+export const ControllerBase = <T extends object>(callback: RequestCallback<T>) => {
   return async (req: Request, res: Response) => {
     const { code, message, payload } = await callback(req, res);
 
-    // Falta considerar si la respuesta es un error.
     return res.status(code).json({
       code,
       message,
@@ -13,5 +12,3 @@ const ControllerBase = <T = {}>(callback: RequestCallback<T>) => {
     })
   }
 }
-
-export default ControllerBase
