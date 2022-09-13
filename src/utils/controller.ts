@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { Request, Response } from "express";
 import { RequestCallback } from "src/types/controller";
 
 const ControllerBase = <T = {}>(callback: RequestCallback<T>) => {
@@ -9,9 +9,9 @@ const ControllerBase = <T = {}>(callback: RequestCallback<T>) => {
     return res.status(code).json({
       code,
       message,
-      payload
-    })
-  }
-}
+      payload,
+    });
+  };
+};
 
-export default ControllerBase
+export default ControllerBase;

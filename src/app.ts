@@ -1,7 +1,7 @@
 // Modules
 
 import express, { Application } from "express";
-import path from "path";
+import bodyParser from "body-parser";
 
 // Routes
 import authRoutes from "./routes/auth.routes";
@@ -19,6 +19,7 @@ app.set("port", process.env.NODE_PORT || 3500);
 // Middelwares
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/auth", authRoutes);
 

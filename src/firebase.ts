@@ -16,6 +16,6 @@ const firebaseConfig = {
   client_x509_cert_url: enviroments.firebase.client_x509_cert_url,
 };
 
-initializeApp({
+export const app = initializeApp({
   credential: credential.cert(firebaseConfig as ServiceAccount),
 });
