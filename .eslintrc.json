@@ -29,7 +29,7 @@
       "error",
       {
         // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md
-        "groups": ["external", "internal", "parent", "index", "type"],
+        "groups": ["builtin", "external", "internal", "type", "parent", "index"],
         "newlines-between": "always-and-inside-groups"
       }
     ]
