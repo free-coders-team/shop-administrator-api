@@ -1,6 +1,7 @@
-import { ApiGiogleAuthResponse } from "src/types/api-google-auth-response";
 import axios from "axios";
-import { constants } from "src/config/constants";
+
+import { ApiGiogleAuthResponse } from "../types/api-google-auth-response";
+import { constants } from "../config/constants";
 
 type AuthUserParams = {
   email: string;
@@ -21,7 +22,6 @@ const AuthUser = async (params: AuthUserParams) => {
       email: userData.email,
     };
   } catch (error) {
-    console.log(error);
     return null;
   }
 };

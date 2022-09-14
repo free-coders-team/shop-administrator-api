@@ -1,8 +1,9 @@
+import { JwtPayload } from "jsonwebtoken";
+
 import { ControllerBase } from "../../utils/controller";
 import { ERROR_CODE_TOKEN_INVALID } from "../../utils/exception-code-responses";
 import { decodeToken } from "../../utils/token";
-import { JwtPayload } from "jsonwebtoken";
-import GetUserByEmail from "src/services/GetUserByEmail";
+import GetUserByEmail from "../../services/GetUserByEmail";
 
 type PayloadType = {
   user: {
@@ -15,7 +16,7 @@ type RequestBody = {
   token: string;
 };
 
-const getSessionData = ControllerBase<PayloadType>(async (req, res) => {
+const getSessionData = ControllerBase<PayloadType>(async (req) => {
   const { token } = req.body as RequestBody;
 
   try {
@@ -37,8 +38,7 @@ const getSessionData = ControllerBase<PayloadType>(async (req, res) => {
         },
       },
     };
-  } catch (error: any) {
-    console.log(error.message);
+  } catch (error) {
     return ERROR_CODE_TOKEN_INVALID;
   }
 });

@@ -1,7 +1,6 @@
 import "../../firebase";
 
 import { ControllerBase } from "../../../src/utils/controller";
-
 import {
   ERROR_CODE_GENERATE_TOKEN,
   ERROR_CODE_INCORRECT_CREDENTIALS,
@@ -9,7 +8,7 @@ import {
 } from "../../../src/utils/exception-code-responses";
 import { generateToken } from "../../../src/utils/token";
 
-import AuthUser from "src/services/AuthUser";
+import AuthUser from "../../services/AuthUser";
 
 type PayloadType = {
   token: string;
@@ -20,7 +19,7 @@ type RequestBody = {
   password: string;
 };
 
-const login = ControllerBase<PayloadType>(async (req, res) => {
+const login = ControllerBase<PayloadType>(async (req) => {
   const { email, password } = req.body as RequestBody;
 
   if (!email || !password) return ERROR_CODE_NO_DATA_PROVIDED;
@@ -43,7 +42,6 @@ const login = ControllerBase<PayloadType>(async (req, res) => {
       payload: { token: token },
     };
   } catch (error) {
-    console.log((error as Error).message);
     return ERROR_CODE_INCORRECT_CREDENTIALS;
   }
 });

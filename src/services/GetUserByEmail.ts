@@ -1,4 +1,5 @@
 import "../firebase";
+
 import { getAuth } from "firebase-admin/auth";
 
 type GetUserByEmailParams = {
@@ -13,10 +14,9 @@ const GetUserByEmail = async (params: GetUserByEmailParams) => {
 
     return {
       uid: userData.uid,
-      email: userData.email!,
+      email: userData.email as string,
     };
   } catch (error) {
-    console.log(error);
     return null;
   }
 };
