@@ -1,12 +1,9 @@
-import { Request, Response } from 'express'
+import { Request, Response } from "express";
+import { ResponseStatus } from "./response-status";
 
-export type ResponseRequest<T> = {
-  payload?: T;
-  code: number;
-  message: string;
-}
+export type ResponseRequest<T> = ResponseStatus & { payload?: T };
 
 export type RequestCallback<T> = (
   req: Request,
   res: Response
-) => Promise<ResponseRequest<T>>
+) => Promise<ResponseRequest<T>>;
