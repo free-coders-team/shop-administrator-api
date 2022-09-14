@@ -14,3 +14,13 @@ export const ERROR_CODE_GENERATE_TOKEN: ResponseStatus = {
   code: 300,
   message: 'No se pudo generar el token'
 }
+
+export const ERROR_CODE_NOT_AUTHORIZATION: ResponseStatus = {
+  code: 404,
+  message: 'No tiene autorización'
+}
+
+export const ERROR_CODE_INCORRECT_FORMAT_TOKEN: ResponseStatus = {
+  code: 400,
+  message: 'Formato de authorization incorrecto'
+}

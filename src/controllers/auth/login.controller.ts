@@ -21,12 +21,13 @@ const login = ControllerBase<PayloadType>(async (req, res) => {
   const { email, password } = req.body as RequestBody;
 
   try {
+    console.log('token decodificado del usuario : ', req.user)
+
     const userRaw = await axios.post(constants.authApiUrl, {
       email: email,
       password: password,
       returnSecureToken: true,
     });
-
     const userData: ApiGiogleAuthResponse = userRaw.data;
 
     const token = generateToken({
