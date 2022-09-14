@@ -6,6 +6,9 @@
   },
   "plugins": ["@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -13,11 +16,9 @@
     "plugin:import/typescript",
     "prettier"
   ],
-  "parserOptions": {
-    "project": ["./tsconfig.json"]
-  },
   "rules": {
     "no-console": "warn",
+    "import/no-unresolved": "off",
     "@typescript-eslint/ban-ts-comment": "error",
     "@typescript-eslint/await-thenable": "error",
     "@typescript-eslint/no-explicit-any": "error",
@@ -29,7 +30,7 @@
       "error",
       {
         // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md
-        "groups": ["external", "internal", "parent", "index", "type"],
+        "groups": ["builtin", "external", "internal", "type", "parent", "index"],
         "newlines-between": "always-and-inside-groups"
       }
     ]
