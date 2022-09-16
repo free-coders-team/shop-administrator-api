@@ -1,5 +1,6 @@
 import { Router } from "express";
-import validateTokenMiddleware from "../middlewares/validate-token";
+
+//import validateTokenMiddleware from "../middlewares/validate-token";
 import login from "../controllers/auth/login.controller";
 import getSessionData from "../controllers/auth/get-session-data.controller";
 

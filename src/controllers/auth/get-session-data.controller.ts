@@ -1,21 +1,22 @@
-import "../../firebase";
-
-import { getAuth } from "firebase-admin/auth";
+import { JwtPayload } from "jsonwebtoken";
 
 import { ControllerBase } from "../../utils/controller";
 import { ERROR_CODE_TOKEN_INVALID } from "../../utils/exception-code-responses";
 import { decodeToken } from "../../utils/token";
-import { JwtPayload } from "jsonwebtoken";
+import GetUserByEmail from "../../services/GetUserByEmail";
 
 type PayloadType = {
-  user: any;
+  user: {
+    uid: string;
+    email: string;
+  };
 };
 
 type RequestBody = {
   token: string;
 };
 
-const getSessionData = ControllerBase<PayloadType>(async (req, res) => {
+const getSessionData = ControllerBase<PayloadType>(async (req) => {
   const { token } = req.body as RequestBody;
 
   try {
@@ -23,21 +24,21 @@ const getSessionData = ControllerBase<PayloadType>(async (req, res) => {
 
     const data = decodeToken(token) as JwtPayload;
 
-    const auth = getAuth();
-    const userData = await auth.getUserByEmail(data.email);
+    const user = await GetUserByEmail({ email: data.email });
+
+    if (user === null) return ERROR_CODE_TOKEN_INVALID;
 
     return {
       code: 200,
       message: "Token valido",
       payload: {
         user: {
-          uid: userData.uid,
-          email: userData.email,
+          uid: user.uid,
+          email: user.email,
         },
       },
     };
-  } catch (error: any) {
-    console.log(error.message);
+  } catch (error) {
     return ERROR_CODE_TOKEN_INVALID;
   }
 });

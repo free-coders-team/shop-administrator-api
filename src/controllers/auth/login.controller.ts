@@ -1,12 +1,14 @@
 import "../../firebase";
 
 import { ControllerBase } from "../../../src/utils/controller";
-
-import axios from "axios";
-import { constants } from "../../../src/config/constants";
-import { ERROR_CODE_INCORRECT_CREDENTIALS } from "../../../src/utils/exception-code-responses";
+import {
+  ERROR_CODE_GENERATE_TOKEN,
+  ERROR_CODE_INCORRECT_CREDENTIALS,
+  ERROR_CODE_NO_DATA_PROVIDED,
+} from "../../../src/utils/exception-code-responses";
 import { generateToken } from "../../../src/utils/token";
-import { ApiGiogleAuthResponse } from "src/types/api-google-auth-response";
+
+import AuthUser from "../../services/AuthUser";
 
 type PayloadType = {
   token: string;
@@ -17,30 +19,29 @@ type RequestBody = {
   password: string;
 };
 
-const login = ControllerBase<PayloadType>(async (req, res) => {
+const login = ControllerBase<PayloadType>(async (req) => {
   const { email, password } = req.body as RequestBody;
 
-  try {
+  if (!email || !password) return ERROR_CODE_NO_DATA_PROVIDED;
 
-    const userRaw = await axios.post(constants.authApiUrl, {
-      email: email,
-      password: password,
-      returnSecureToken: true,
-    });
-    const userData: ApiGiogleAuthResponse = userRaw.data;
+  try {
+    const user = await AuthUser({ email, password });
+
+    if (!user) return ERROR_CODE_INCORRECT_CREDENTIALS;
 
     const token = generateToken({
-      uid: userData.localId,
-      email: userData.email,
+      uid: user.uid,
+      email: user.email,
     });
+
+    if (!token) return ERROR_CODE_GENERATE_TOKEN;
 
     return {
       code: 200,
       message: "Usuario validado",
-      payload: { token: token! },
+      payload: { token: token },
     };
-  } catch (error: any) {
-    console.log(error.message);
+  } catch (error) {
     return ERROR_CODE_INCORRECT_CREDENTIALS;
   }
 });
