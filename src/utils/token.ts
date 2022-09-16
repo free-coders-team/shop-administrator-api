@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -16,3 +15,13 @@ export const decodeToken = (token: string) => {
   const data = jwt.decode(token);
   return data;
 };
+
+export const verifyToken = (token: string) => {
+  try {
+    const secret = process.env.JWT_SECRET || ''
+    const userData = jwt.verify(token, secret)
+    return userData
+  } catch (error) {
+    return null
+  }
+}

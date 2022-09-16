@@ -6,6 +6,7 @@ import cors from "cors";
 
 // Routes
 import authRoutes from "./routes/auth.routes";
+import productRoutes from './routes/product.routes'
 
 import "./firebase";
 
@@ -23,5 +24,6 @@ app.use(cors());
 app.use(morgan("dev"));
 
 app.use("/auth", authRoutes);
+app.use('/product', productRoutes)
 
 export default app;
