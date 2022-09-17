@@ -5,8 +5,9 @@ import { ControllerBase } from "../../utils/controller";
 import {
   ERROR_CODE_GENERATE_TOKEN,
   ERROR_CODE_INCORRECT_CREDENTIALS,
-  ERROR_CODE_NO_DATA_PROVIDED,
-} from "../../utils/response-error-codes";
+  ERROR_CODE_NO_DATA_PROVIDED
+} from "../../utils/response-error-codes"
+
 
 import AuthUser from "../../services/AuthUser";
 

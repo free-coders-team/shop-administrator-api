@@ -1,4 +1,4 @@
-import { ResponseStatus } from "src/types/response-status";
+import { ResponseStatus } from "../types/response-status";
 
 export const ERROR_CODE_TOKEN_INVALID: ResponseStatus = {
   code: 400,
