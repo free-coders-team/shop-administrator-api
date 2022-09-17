@@ -1,7 +1,7 @@
 import { JwtPayload } from "jsonwebtoken";
 
 import { ControllerBase } from "../../utils/controller";
-import { ERROR_CODE_TOKEN_INVALID } from "../../utils/exception-code-responses";
+import { ERROR_CODE_TOKEN_INVALID } from "../../utils/response-error-codes";
 import { decodeToken } from "../../utils/token";
 import GetUserByEmail from "../../services/GetUserByEmail";
 
