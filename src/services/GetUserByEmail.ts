@@ -1,4 +1,4 @@
-import "../firebase";
+import "../config/firebase";
 
 import { getAuth } from "firebase-admin/auth";
 

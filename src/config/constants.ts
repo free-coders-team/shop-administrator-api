@@ -1,7 +1,3 @@
-import { enviroments } from "./enviroment";
+import { FIREBASE_API_KEY } from "./enviroment";
 
-export const constants = {
-  authApiUrl:
-    "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
-    enviroments.firebase.api_key,
-};
+export const AUTH_API_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`;

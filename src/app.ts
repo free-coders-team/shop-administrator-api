@@ -1,21 +1,18 @@
-// Modules
-
 import express, { Application } from "express";
 import morgan from "morgan";
 import cors from "cors";
 
-// Routes
 import authRoutes from "./routes/auth.routes";
-import productRoutes from './routes/product.routes'
+import productRoutes from "./routes/product.routes";
 
-import "./firebase";
+import "./config/firebase";
 
-// Iniciadores
+import { NODE_PORT } from "./config/enviroment";
 
 const app: Application = express();
 
 // Settings
-app.set("port", process.env.NODE_PORT || 3500);
+app.set("port", NODE_PORT);
 
 // Middelwares
 app.use(express.json());
@@ -24,6 +21,6 @@ app.use(cors());
 app.use(morgan("dev"));
 
 app.use("/auth", authRoutes);
-app.use('/product', productRoutes)
+app.use("/product", productRoutes);
 
 export default app;

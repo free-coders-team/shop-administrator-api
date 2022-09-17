@@ -1,12 +1,12 @@
-import "../../firebase";
+import "../../config/firebase";
 
-import { ControllerBase } from "../../../src/utils/controller";
+import { generateToken } from "../../utils/token";
+import { ControllerBase } from "../../utils/controller";
 import {
   ERROR_CODE_GENERATE_TOKEN,
   ERROR_CODE_INCORRECT_CREDENTIALS,
   ERROR_CODE_NO_DATA_PROVIDED,
-} from "../../../src/utils/exception-code-responses";
-import { generateToken } from "../../../src/utils/token";
+} from "../../utils/response-error-codes";
 
 import AuthUser from "../../services/AuthUser";
 
@@ -19,7 +19,7 @@ type RequestBody = {
   password: string;
 };
 
-const login = ControllerBase<PayloadType>(async (req) => {
+const credentialsValidation = ControllerBase<PayloadType>(async (req) => {
   const { email, password } = req.body as RequestBody;
 
   if (!email || !password) return ERROR_CODE_NO_DATA_PROVIDED;
@@ -31,19 +31,19 @@ const login = ControllerBase<PayloadType>(async (req) => {
 
     const token = generateToken({
       uid: user.uid,
-      email: user.email
+      email: user.email,
     });
 
     if (!token) return ERROR_CODE_GENERATE_TOKEN;
 
     return {
       code: 200,
-      message: "Usuario validado",
       payload: { token: token },
+      message: "Usuario validado",
     };
   } catch (error) {
     return ERROR_CODE_INCORRECT_CREDENTIALS;
   }
 });
 
-export default login;
+export default credentialsValidation;
