@@ -1,6 +1,7 @@
 //var admin = require("firebase-admin");
 import { initializeApp } from "firebase-admin/app";
 import { credential, ServiceAccount } from "firebase-admin";
+
 import { enviroments } from "./config/enviroment";
 
 const firebaseConfig = {

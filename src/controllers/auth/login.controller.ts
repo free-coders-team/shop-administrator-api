@@ -31,7 +31,7 @@ const login = ControllerBase<PayloadType>(async (req) => {
 
     const token = generateToken({
       uid: user.uid,
-      email: user.email,
+      email: user.email
     });
 
     if (!token) return ERROR_CODE_GENERATE_TOKEN;
