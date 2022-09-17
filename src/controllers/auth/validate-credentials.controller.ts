@@ -1,12 +1,12 @@
 import "../../firebase";
 
-import { ControllerBase } from "../../../src/utils/controller";
+import { ControllerBase } from "../../utils/controller";
 import {
   ERROR_CODE_GENERATE_TOKEN,
   ERROR_CODE_INCORRECT_CREDENTIALS,
   ERROR_CODE_NO_DATA_PROVIDED,
-} from "../../../src/utils/exception-code-responses";
-import { generateToken } from "../../../src/utils/token";
+} from "../../utils/exception-code-responses";
+import { generateToken } from "../../utils/token";
 
 import AuthUser from "../../services/AuthUser";
 
@@ -19,7 +19,7 @@ type RequestBody = {
   password: string;
 };
 
-const login = ControllerBase<PayloadType>(async (req) => {
+const validateCredentials = ControllerBase<PayloadType>(async (req) => {
   const { email, password } = req.body as RequestBody;
 
   if (!email || !password) return ERROR_CODE_NO_DATA_PROVIDED;
@@ -46,4 +46,4 @@ const login = ControllerBase<PayloadType>(async (req) => {
   }
 });
 
-export default login;
+export default validateCredentials;
