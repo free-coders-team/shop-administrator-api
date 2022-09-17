@@ -23,4 +23,6 @@ app.use(morgan("dev"));
 app.use("/auth", authRoutes);
 app.use("/product", productRoutes);
 
+app.get("/", (_, res) => res.send("¡Welcome viewers!"));
+
 export default app;
