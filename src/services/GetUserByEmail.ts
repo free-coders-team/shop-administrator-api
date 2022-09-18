@@ -7,9 +7,8 @@ type GetUserByEmailParams = {
 };
 
 const GetUserByEmail = async (params: GetUserByEmailParams) => {
-  const auth = getAuth();
-
   try {
+    const auth = getAuth();
     const userData = await auth.getUserByEmail(params.email);
 
     return {
