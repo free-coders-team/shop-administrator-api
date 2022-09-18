@@ -8,6 +8,6 @@ import validateTokenMiddleware from "../middlewares/validate-token";
 const router = Router();
 
 router.post("/", credentialsValidation);
-router.get("/get-session-data", validateTokenMiddleware, getSessionData);
+router.get("/session-data", validateTokenMiddleware, getSessionData);
 
 export default router;
