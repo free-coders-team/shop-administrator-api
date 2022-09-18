@@ -1,4 +1,4 @@
-import { MemberState } from "src/types/member-state";
+import { MemberState } from "../types/member-state";
 
 export type Member = {
   uid: string;
