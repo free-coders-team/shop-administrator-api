@@ -8,11 +8,11 @@ type PayloadType = {
   user: {
     uid: string;
     email: string;
-  }
-}
+  };
+};
 
 const getSessionData = ControllerBase<PayloadType>(async (req) => {
-  const { email } = req.user as UserToken
+  const { email } = req.user as UserToken;
 
   const user = await GetUserByEmail({ email });
 
@@ -25,9 +25,9 @@ const getSessionData = ControllerBase<PayloadType>(async (req) => {
       user: {
         uid: user.uid,
         email: user.email,
-      }
-    }
-  }
-})
+      },
+    },
+  };
+});
 
 export default getSessionData;
