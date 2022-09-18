@@ -1,4 +1,4 @@
-import { ResponseStatus } from "src/types/response-status";
+import { ResponseStatus } from "../types/response-status";
 
 export const ERROR_CODE_TOKEN_INVALID: ResponseStatus = {
   code: 400,
@@ -17,15 +17,15 @@ export const ERROR_CODE_GENERATE_TOKEN: ResponseStatus = {
 
 export const ERROR_CODE_NOT_AUTHORIZATION: ResponseStatus = {
   code: 404,
-  message: "No tiene autorización",
-};
-
-export const ERROR_CODE_INCORRECT_FORMAT_TOKEN: ResponseStatus = {
-  code: 400,
-  message: "Formato de authorization incorrecto",
-};
+  message: 'No tiene autorización'
+}
 
 export const ERROR_CODE_NO_DATA_PROVIDED: ResponseStatus = {
   code: 400,
   message: "No se enviaron los datos requeridos",
 };
+
+export const ERROR_CODE_NOT_FOUND_USER: ResponseStatus = {
+  code: 404,
+  message: "El usuario no existe"
+}

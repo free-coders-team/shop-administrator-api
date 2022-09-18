@@ -1,13 +1,13 @@
 import { Router } from "express";
 
-//import validateTokenMiddleware from "../middlewares/validate-token";
-import login from "../controllers/auth/login.controller";
-import getSessionData from "../controllers/auth/get-session-data.controller";
+import getSessionData from "../controllers/auth/get-session-data";
+
+import credentialsValidation from "../controllers/auth/credentials-validation";
+import validateTokenMiddleware from "../middlewares/validate-token";
 
 const router = Router();
 
-// router.post("/", validateTokenMiddleware, login);
-router.post("/", login);
-router.post("/get-session-data", getSessionData);
+router.post("/", credentialsValidation);
+router.get("/get-session-data", validateTokenMiddleware, getSessionData);
 
 export default router;

@@ -1,25 +1,19 @@
-import { ControllerMiddlewareBase } from "../utils/middleware"
-import jwt from 'jsonwebtoken'
-import { ERROR_CODE_TOKEN_INVALID, ERROR_CODE_NOT_AUTHORIZATION, ERROR_CODE_INCORRECT_FORMAT_TOKEN } from '../utils/exception-code-responses';
 import { UserToken } from "../types/token";
+import { verifyToken } from "../utils/token";
+import { ControllerMiddlewareBase } from "../utils/middleware";
+import {
+  ERROR_CODE_TOKEN_INVALID,
+  ERROR_CODE_NOT_AUTHORIZATION,
+} from "../utils/response-error-codes";
 
-const validateTokenMiddleware = ControllerMiddlewareBase(
-  async (req, res, next) => {
-    const { authorization } = req.headers
-    console.log('')
+const validateTokenMiddleware = ControllerMiddlewareBase(async (req, res, next) => {
+  const { authorization } = req.headers;
+  if (!authorization) return ERROR_CODE_NOT_AUTHORIZATION;
+  const authorizationSplit = authorization.split("Bearer ");
+  const user = verifyToken(authorizationSplit[1]);
+  if (!user) return ERROR_CODE_TOKEN_INVALID;
+  req.user = user as UserToken;
+  next();
+});
 
-    if (authorization) {
-      const [bearer, token] = authorization.toString().split(' ')
-      console.log(token)
-      const isValidToken = jwt.verify(token as string, process.env.JWT_SECRET as string)
-      console.log(isValidToken)
-
-      req.user = isValidToken as UserToken
-      return next()
-    }
-
-    return ERROR_CODE_INCORRECT_FORMAT_TOKEN
-  }
-)
-
-export default validateTokenMiddleware
+export default validateTokenMiddleware;

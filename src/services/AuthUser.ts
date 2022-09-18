@@ -1,7 +1,7 @@
 import axios from "axios";
 
+import { AUTH_API_URL } from "../config/constants";
 import { ApiGiogleAuthResponse } from "../types/api-google-auth-response";
-import { constants } from "../config/constants";
 
 type AuthUserParams = {
   email: string;
@@ -10,7 +10,7 @@ type AuthUserParams = {
 
 const AuthUser = async (params: AuthUserParams) => {
   try {
-    const userRaw = await axios.post(constants.authApiUrl, {
+    const userRaw = await axios.post(AUTH_API_URL, {
       email: params.email,
       password: params.password,
       returnSecureToken: true,
