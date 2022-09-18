@@ -24,3 +24,8 @@ export const ERROR_CODE_NO_DATA_PROVIDED: ResponseStatus = {
   code: 400,
   message: "No se enviaron los datos requeridos",
 };
+
+export const ERROR_CODE_NOT_FOUND_USER: ResponseStatus = {
+  code: 404,
+  message: "El usuario no existe"
+}

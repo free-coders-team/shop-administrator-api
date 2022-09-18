@@ -25,26 +25,22 @@ const credentialsValidation = ControllerBase<PayloadType>(async (req) => {
 
   if (!email || !password) return ERROR_CODE_NO_DATA_PROVIDED;
 
-  try {
-    const user = await AuthUser({ email, password });
+  const user = await AuthUser({ email, password });
 
-    if (!user) return ERROR_CODE_INCORRECT_CREDENTIALS;
+  if (!user) return ERROR_CODE_INCORRECT_CREDENTIALS;
 
-    const token = generateToken({
-      uid: user.uid,
-      email: user.email,
-    });
+  const token = generateToken({
+    uid: user.uid,
+    email: user.email,
+  });
 
-    if (!token) return ERROR_CODE_GENERATE_TOKEN;
+  if (!token) return ERROR_CODE_GENERATE_TOKEN;
 
-    return {
-      code: 200,
-      payload: { token: token },
-      message: "Usuario validado",
-    };
-  } catch (error) {
-    return ERROR_CODE_INCORRECT_CREDENTIALS;
-  }
+  return {
+    code: 200,
+    payload: { token: token },
+    message: "Usuario validado",
+  };
 });
 
 export default credentialsValidation;
