@@ -12,9 +12,9 @@ type PayloadType = {
 };
 
 const getSessionData = ControllerBase<PayloadType>(async (req) => {
-  const { email } = req.user as UserToken;
+  const { email, uid } = req.user as UserToken;
 
-  const user = await GetUserByEmail({ email });
+  const user = await GetUserByEmail({ email, uid });
 
   if (!user) return ERROR_CODE_NOT_FOUND_USER;
 

@@ -1,20 +1,37 @@
 import "../config/firebase";
 
-import { getAuth } from "firebase-admin/auth";
+import { getFirestore } from "firebase-admin/firestore";
+
+import { Member } from "../models/members/member";
+import AnnouncementsConverter from "../models/members/converter";
 
 type GetUserByEmailParams = {
   email: string;
+  uid: string;
 };
 
 const GetUserByEmail = async (params: GetUserByEmailParams) => {
   try {
-    const auth = getAuth();
-    const userData = await auth.getUserByEmail(params.email);
+    const db = getFirestore();
+    const usersRef = db.collection("users");
 
-    return {
-      uid: userData.uid,
-      email: userData.email as string,
-    };
+    const snapshot = await usersRef
+      .where("email", "==", params.email)
+      .where("uid", "==", params.uid)
+      // .withConverter(AnnouncementsConverter)
+      .get();
+
+    if (snapshot.empty) {
+      return null;
+    }
+
+    const user: Member[] = [];
+    snapshot.forEach((doc) => {
+      console.log(doc.data());
+      // user.push(doc.data());
+    });
+
+    return user[0];
   } catch (error) {
     return null;
   }
