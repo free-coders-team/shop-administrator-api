@@ -3,13 +3,13 @@ import dotenv from "dotenv";
 
 import { UserToken } from "../types/token";
 import { JWT_SECRET_KEY } from "../config/enviroment";
-import { TokenExpiresTime } from "../config/constants";
+import { TOKEN_EXPIRES_TIME } from "../config/constants";
 
 dotenv.config();
 
 export const generateToken = (payload: UserToken) => {
   const token = jwt.sign(payload, JWT_SECRET_KEY as string, {
-    expiresIn: TokenExpiresTime,
+    expiresIn: TOKEN_EXPIRES_TIME,
   });
   return token;
 };
