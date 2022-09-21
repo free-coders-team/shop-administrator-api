@@ -2,7 +2,7 @@ import { ControllerBase } from "../../utils/controller";
 import { ERROR_CODE_NOT_FOUND_USER } from "../../utils/response-error-codes";
 
 import { UserToken } from "../../types/token";
-import GetUserByEmail from "../../services/GetUserByEmail";
+import GetUserByUID from "../../services/GetUserByUID";
 
 type PayloadType = {
   user: {
@@ -12,9 +12,9 @@ type PayloadType = {
 };
 
 const getSessionData = ControllerBase<PayloadType>(async (req) => {
-  const { email, uid } = req.user as UserToken;
+  const { uid } = req.user as UserToken;
 
-  const user = await GetUserByEmail({ email, uid });
+  const user = await GetUserByUID({ uid });
 
   if (!user) return ERROR_CODE_NOT_FOUND_USER;
 
@@ -22,10 +22,7 @@ const getSessionData = ControllerBase<PayloadType>(async (req) => {
     code: 200,
     message: "Token valido",
     payload: {
-      user: {
-        uid: user.uid,
-        email: user.email,
-      },
+      user,
     },
   };
 });

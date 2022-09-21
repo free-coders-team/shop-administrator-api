@@ -7,7 +7,9 @@ import { JWT_SECRET_KEY } from "../config/enviroment";
 dotenv.config();
 
 export const generateToken = (payload: UserToken) => {
-  const token = jwt.sign(payload, JWT_SECRET_KEY as string);
+  const token = jwt.sign(payload, JWT_SECRET_KEY as string, {
+    expiresIn: "7d",
+  });
   return token;
 };
 
