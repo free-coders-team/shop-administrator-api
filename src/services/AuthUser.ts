@@ -15,6 +15,7 @@ const AuthUser = async (params: AuthUserParams) => {
       password: params.password,
       returnSecureToken: true,
     });
+
     const userData: ApiGiogleAuthResponse = userRaw.data;
 
     return {

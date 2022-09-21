@@ -1,4 +1,4 @@
 export type ResponseStatus = {
   code: number;
-  message: string;
+  message?: string;
 };
